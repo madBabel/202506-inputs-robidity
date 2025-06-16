@@ -11,6 +11,7 @@ on:
       target:
         description: "Which environment the workflow will target"  
         type: environment 
+        required: true
 
       tag:
         description: "Release from which to build and deploy"
@@ -32,7 +33,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ inputs.dry-run == false }} 
+    if: ${{ inputs['dry-run'] == false }} 
     environment: ${{ inputs.target }}   
     steps:
       - name: Deploy
